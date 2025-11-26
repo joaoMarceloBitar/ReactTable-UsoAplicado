@@ -1,8 +1,8 @@
-import React from "react"
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table"
-// useReactTable()      -    cria a máquina: row model, cells, header model, meta, sorting, filtering
+// useReactTable()      -    cria a instância da tabela, incluindo modelos de linha, cabeçalhos, visibilidade de colunas, meta, etc.
 // getCoreRowModel()    -    gera as linhas básicas
-// flexRender()         -    sabe renderizar header e cell
+// flexRender()         -    renderiza qualquer tipo de conteúdo
+
 import type { ColumnDef } from "@tanstack/react-table"
 // tipo de dado da coluna
 //-----------------------------------------------------
@@ -56,6 +56,7 @@ export default function Table() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    //getCoreRowModel é obrigatório, se não a tabela não renderiza nada.
   })
 
   return (
