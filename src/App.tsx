@@ -2,6 +2,7 @@ import Table from "./components/Table"
 import './App.css'
 import TableSortSearch from "./components/TableSortSearch"
 import TableWithSelection from "./components/TableWithSelection"
+import TableAdvanced from "./components/TableAdvanced"
 
 function App() {
   return (
@@ -39,6 +40,15 @@ function App() {
           Seleção múltipla com checkboxes, ações em lote e cálculos dinâmicos.
         </p>
         <TableWithSelection />
+      </div>
+
+      {/* Tabela Completa */}
+      <div className="demo-section">
+        <h2 className="section-title">4. Funcionalidades Completas</h2>
+        <p className="section-description">
+          Paginação, filtros por coluna, export CSV, formatação de células e todas as funcionalidades integradas.
+        </p>
+        <TableAdvanced />
       </div>
     </div>
   )

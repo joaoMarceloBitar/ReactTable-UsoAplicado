@@ -120,8 +120,15 @@
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
-  background: white;
+  background: white !important;
+  color: #333 !important;
   cursor: pointer;
+  font-family: inherit;
+}
+
+.page-size-selector option {
+  color: #333 !important;
+  background: white !important;
 }
 
 /* Estilos para seleção */
@@ -225,15 +232,23 @@
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
-  background: white;
+  background: white !important;
+  color: #333 !important;
   cursor: pointer;
   min-width: 120px;
+  font-family: inherit;
 }
 
 .filter-select:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.filter-select option {
+  color: #333 !important;
+  background: white !important;
+  padding: 0.5rem;
 }
 
 /* Filtro de preço */
