@@ -1,57 +1,52 @@
-import Table from "./components/Table"
+import TabelaBasica from "./componentes/TabelaBasica"
 import './App.css'
-import TableSortSearch from "./components/TableSortSearch"
-import TableWithSelection from "./components/TableWithSelection"
-import TableAdvanced from "./components/TableAdvanced"
+import TabelaBuscaOrdenacao from "./componentes/TabelaBuscaOrdenacao"
+import TabelaSelecaoLinhas from "./componentes/TabelaSelecaoLinhas"
+import TabelaAvancada from "./componentes/TabelaAvancada"
 
-function App() {
+function Aplicacao() {
   return (
-    <div className="app-container">
-      {/* Hero Section */}
-      <div className="hero-section">
-        <h1 className="hero-title">React Table</h1>
-        <p className="hero-subtitle">
+    <div className="container-aplicacao">
+      <div className="secao-hero">
+        <h1 className="titulo-hero">Tabelas React</h1>
+        <p className="subtitulo-hero">
           Demonstração prática do TanStack Table com funcionalidades avançadas
         </p>
       </div>
 
-      {/* Tabela Básica */}
-      <div className="demo-section">
-        <h2 className="section-title">1. Tabela Básica</h2>
-        <p className="section-description">
+      <div className="secao-demo">
+        <h2 className="titulo-secao">1. Tabela Básica</h2>
+        <p className="descricao-secao">
           Implementação simples com dados estáticos e renderização básica.
         </p>
-        <Table />
+        <TabelaBasica />
       </div>
 
-      {/* Tabela com Busca e Ordenação */}
-      <div className="demo-section">
-        <h2 className="section-title">2. Busca e Ordenação</h2>
-        <p className="section-description">
+      <div className="secao-demo">
+        <h2 className="titulo-secao">2. Busca e Ordenação</h2>
+        <p className="descricao-secao">
           Funcionalidades de filtro global e ordenação por colunas com indicadores visuais.
         </p>
-        <TableSortSearch />
+        <TabelaBuscaOrdenacao />
       </div>
 
-      {/* Tabela com Seleção */}
-      <div className="demo-section">
-        <h2 className="section-title">3. Seleção de Linhas</h2>
-        <p className="section-description">
+      <div className="secao-demo">
+        <h2 className="titulo-secao">3. Seleção de Linhas</h2>
+        <p className="descricao-secao">
           Seleção múltipla com checkboxes, ações em lote e cálculos dinâmicos.
         </p>
-        <TableWithSelection />
+        <TabelaSelecaoLinhas />
       </div>
 
-      {/* Tabela Completa */}
-      <div className="demo-section">
-        <h2 className="section-title">4. Funcionalidades Completas</h2>
-        <p className="section-description">
+      <div className="secao-demo">
+        <h2 className="titulo-secao">4. Funcionalidades Completas</h2>
+        <p className="descricao-secao">
           Paginação, filtros por coluna, export CSV, formatação de células e todas as funcionalidades integradas.
         </p>
-        <TableAdvanced />
+        <TabelaAvancada />
       </div>
     </div>
   )
 }
 
-export default App
+export default Aplicacao

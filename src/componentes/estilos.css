@@ -1,6 +1,6 @@
 /* Estilos modernos para as tabelas */
 
-.modern-table {
+.tabela-moderna {
   width: 100%;
   border-collapse: collapse;
   background: white;
@@ -10,7 +10,7 @@
   margin: 1rem 0;
 }
 
-.modern-table th {
+.tabela-moderna th {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 1rem;
@@ -23,26 +23,26 @@
   transition: all 0.2s ease;
 }
 
-.modern-table th:hover {
+.tabela-moderna th:hover {
   background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
 }
 
-.modern-table td {
+.tabela-moderna td {
   padding: 1rem;
   border-bottom: 1px solid #e2e8f0;
   transition: background-color 0.2s ease;
 }
 
-.modern-table tr:hover td {
+.tabela-moderna tr:hover td {
   background-color: #f8fafc;
 }
 
-.modern-table tr:last-child td {
+.tabela-moderna tr:last-child td {
   border-bottom: none;
 }
 
 /* Estilos para inputs de busca */
-.search-input {
+.input-busca {
   width: 100%;
   max-width: 400px;
   padding: 0.75rem 1rem !important;
@@ -55,18 +55,18 @@
   font-family: inherit;
 }
 
-.search-input:focus {
+.input-busca:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.search-input::placeholder {
+.input-busca::placeholder {
   color: #a0aec0;
 }
 
 /* Estilos para botões */
-.btn {
+.botao {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
@@ -76,33 +76,33 @@
   font-size: 0.9rem;
 }
 
-.btn-primary {
+.botao-primario {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
 }
 
-.btn-primary:hover:not(:disabled) {
+.botao-primario:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.btn-secondary {
+.botao-secundario {
   background: #f7fafc;
   color: #4a5568;
   border: 1px solid #e2e8f0;
 }
 
-.btn-secondary:hover:not(:disabled) {
+.botao-secundario:hover:not(:disabled) {
   background: #edf2f7;
 }
 
-.btn:disabled {
+.botao:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /* Controles de paginação */
-.pagination-controls {
+.controles-paginacao {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -110,13 +110,13 @@
   flex-wrap: wrap;
 }
 
-.pagination-info {
+.info-paginacao {
   color: #718096;
   font-size: 0.9rem;
   margin: 0 1rem;
 }
 
-.page-size-selector {
+.seletor-tamanho-pagina {
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -126,13 +126,13 @@
   font-family: inherit;
 }
 
-.page-size-selector option {
+.seletor-tamanho-pagina option {
   color: #333 !important;
   background: white !important;
 }
 
 /* Estilos para seleção */
-.selection-info {
+.info-selecao {
   background: linear-gradient(135deg, #e6fffa 0%, #f0fff4 100%);
   border: 1px solid #9ae6b4;
   border-radius: 8px;
@@ -140,38 +140,38 @@
   margin-bottom: 1rem;
 }
 
-.selection-info h3 {
+.info-selecao h3 {
   color: #2f855a;
   margin-bottom: 0.5rem;
 }
 
-.selection-info p {
+.info-selecao p {
   color: #38a169;
   margin: 0.25rem 0;
 }
 
-.selected-row {
+.linha-selecionada {
   background-color: #e6fffa !important;
 }
 
-.selected-list {
+.lista-selecionados {
   background: #f7fafc;
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
 }
 
-.selected-list h3 {
+.lista-selecionados h3 {
   color: #2d3748;
   margin-bottom: 1rem;
 }
 
-.selected-list ul {
+.lista-selecionados ul {
   list-style: none;
   padding: 0;
 }
 
-.selected-list li {
+.lista-selecionados li {
   padding: 0.5rem;
   background: white;
   margin-bottom: 0.5rem;
@@ -180,7 +180,7 @@
 }
 
 /* Checkbox customizado */
-.custom-checkbox {
+.checkbox-personalizado {
   width: 18px;
   height: 18px;
   accent-color: #667eea;
@@ -188,7 +188,7 @@
 }
 
 /* Controles da tabela */
-.table-controls {
+.controles-tabela {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -197,13 +197,13 @@
   gap: 1rem;
 }
 
-.export-controls {
+.controles-export {
   display: flex;
   gap: 0.5rem;
 }
 
 /* Filtros por coluna */
-.column-filters {
+.filtros-colunas {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -214,13 +214,13 @@
   flex-wrap: wrap;
 }
 
-.filter-group {
+.grupo-filtro {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.filter-group label {
+.grupo-filtro label {
   font-size: 0.8rem;
   font-weight: 600;
   color: #4a5568;
@@ -228,7 +228,7 @@
   letter-spacing: 0.5px;
 }
 
-.filter-select {
+.select-filtro {
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -239,26 +239,26 @@
   font-family: inherit;
 }
 
-.filter-select:focus {
+.select-filtro:focus {
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
 }
 
-.filter-select option {
+.select-filtro option {
   color: #333 !important;
   background: white !important;
   padding: 0.5rem;
 }
 
 /* Filtro de preço */
-.price-filter {
+.filtro-preco {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.price-input {
+.input-preco {
   width: 80px;
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
@@ -266,13 +266,13 @@
   text-align: center;
 }
 
-.price-input:focus {
+.input-preco:focus {
   outline: none;
   border-color: #667eea;
 }
 
 /* Status badges */
-.status-badge {
+.badge-status {
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
   font-size: 0.8rem;
@@ -281,55 +281,55 @@
   letter-spacing: 0.5px;
 }
 
-.status-completed {
+.status-concluido {
   background: #c6f6d5;
   color: #22543d;
 }
 
-.status-pending {
+.status-pendente {
   background: #fef5e7;
   color: #c05621;
 }
 
-.status-cancelled {
+.status-cancelado {
   background: #fed7d7;
   color: #c53030;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .modern-table {
+  .tabela-moderna {
     font-size: 0.9rem;
   }
   
-  .modern-table th,
-  .modern-table td {
+  .tabela-moderna th,
+  .tabela-moderna td {
     padding: 0.75rem 0.5rem;
   }
   
-  .pagination-controls {
+  .controles-paginacao {
     justify-content: center;
   }
   
-  .search-input {
+  .input-busca {
     max-width: 100%;
   }
   
-  .table-controls {
+  .controles-tabela {
     flex-direction: column;
     align-items: stretch;
   }
   
-  .column-filters {
+  .filtros-colunas {
     flex-direction: column;
     align-items: stretch;
   }
   
-  .filter-group {
+  .grupo-filtro {
     width: 100%;
   }
   
-  .filter-select {
+  .select-filtro {
     min-width: auto;
   }
 }
