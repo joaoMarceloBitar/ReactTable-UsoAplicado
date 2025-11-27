@@ -6,12 +6,9 @@ import {
   getSortedRowModel,
   flexRender,
 } from "@tanstack/react-table"
-
 import type { ColumnDef, SortingState } from "@tanstack/react-table"
+import "./styles.css"
 
-//--------------------------------------------------------------
-// 1. Tipo dos dados
-//--------------------------------------------------------------
 type Product = {
   id: number
   name: string
@@ -19,19 +16,21 @@ type Product = {
   stock: number
 }
 
-//--------------------------------------------------------------
-// 2. Dados de exemplo
-//--------------------------------------------------------------
 const products: Product[] = [
   { id: 1, name: "Maçã", price: 5, stock: 120 },
   { id: 2, name: "Banana", price: 3, stock: 80 },
   { id: 3, name: "Morango", price: 10, stock: 40 },
   { id: 4, name: "Abacate", price: 7, stock: 60 },
+  { id: 5, name: "Laranja", price: 4, stock: 95 },
+  { id: 6, name: "Uva", price: 12, stock: 35 },
+  { id: 7, name: "Manga", price: 8, stock: 50 },
+  { id: 8, name: "Kiwi", price: 15, stock: 25 },
+  { id: 9, name: "Abacaxi", price: 9, stock: 30 },
+  { id: 10, name: "Melão", price: 6, stock: 45 },
+  { id: 11, name: "Melancia", price: 11, stock: 20 },
+  { id: 12, name: "Pêssego", price: 13, stock: 28 },
 ]
 
-//--------------------------------------------------------------
-// 3. Definição das colunas
-//--------------------------------------------------------------
 const columns: ColumnDef<Product>[] = [
   {
     header: "ID",
@@ -51,23 +50,10 @@ const columns: ColumnDef<Product>[] = [
   },
 ]
 
-//--------------------------------------------------------------
-// 4. Componente avançado com search + sorting
-//--------------------------------------------------------------
 export default function TableSortSearch() {
-  // estado do filtro global
   const [globalFilter, setGlobalFilter] = useState("")
+  const [sorting, setSorting] = useState<SortingState>([])
 
-  // estado de ordenação
-const [sorting, setSorting] = useState<SortingState>([])
-  //----------------------------------------------------------
-  // criação da tabela com funcionalidades adicionais:
-  //
-  // ✔ globalFilter (busca geral)
-  // ✔ sorting (ordenar colunas)
-  // ✔ filteredRowModel (filtrar linha)
-  // ✔ sortedRowModel (ordenar linha)
-  //----------------------------------------------------------
   const table = useReactTable({
     data: products,
     columns,
@@ -83,20 +69,24 @@ const [sorting, setSorting] = useState<SortingState>([])
     globalFilterFn: "includesString",           // modo de busca (string)
   })
 
+  const filteredRows = table.getFilteredRowModel().rows
+  
   return (
-    <div style={{ padding: 20 }}>
-      {/*--------------------------------------------------------
-          Input para Search Global
-      --------------------------------------------------------*/}
+    <div>
       <input
         type="text"
-        placeholder="Buscar produto..."
+        placeholder="🔍 Buscar produto..."
         value={globalFilter ?? ""}
         onChange={e => setGlobalFilter(e.target.value)}
-        style={{ marginBottom: 15, padding: 6, width: "300px" }}
+        className="search-input"
+        style={{ marginBottom: "1rem" }}
       />
+      
+      <p style={{ marginBottom: "1rem", color: "#666" }}>
+        Mostrando {filteredRows.length} de {products.length} produtos
+      </p>
 
-      <table border={5} cellPadding={13}>
+      <table className="modern-table">
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
@@ -104,11 +94,8 @@ const [sorting, setSorting] = useState<SortingState>([])
                 <th
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
-                  style={{ cursor: "pointer" }}
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
-
-                  {/* Indicadores de sorting */}
                   {{
                     asc: " 🔼",
                     desc: " 🔽",
@@ -118,17 +105,24 @@ const [sorting, setSorting] = useState<SortingState>([])
             </tr>
           ))}
         </thead>
-
         <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+          {filteredRows.length === 0 ? (
+            <tr>
+              <td colSpan={4} style={{ textAlign: "center", padding: "2rem", color: "#666" }}>
+                Nenhum produto encontrado
+              </td>
             </tr>
-          ))}
+          ) : (
+            filteredRows.map(row => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

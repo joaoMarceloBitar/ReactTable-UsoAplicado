@@ -7,8 +7,8 @@ import {
   getPaginationRowModel,
   flexRender,
 } from "@tanstack/react-table"
-
 import type { ColumnDef, SortingState } from "@tanstack/react-table"
+import "./styles.css"
 
 //--------------------------------------------------------------
 // 1. Tipo dos dados - mais produtos para demonstrar paginação
@@ -25,18 +25,50 @@ type Product = {
 // 2. Dados expandidos para demonstrar paginação
 //--------------------------------------------------------------
 const products: Product[] = [
+  // Frutas
   { id: 1, name: "Maçã", price: 5, stock: 120, category: "Frutas" },
   { id: 2, name: "Banana", price: 3, stock: 80, category: "Frutas" },
   { id: 3, name: "Morango", price: 10, stock: 40, category: "Frutas" },
   { id: 4, name: "Abacate", price: 7, stock: 60, category: "Frutas" },
-  { id: 5, name: "Arroz", price: 15, stock: 200, category: "Grãos" },
-  { id: 6, name: "Feijão", price: 12, stock: 150, category: "Grãos" },
-  { id: 7, name: "Leite", price: 8, stock: 90, category: "Laticínios" },
-  { id: 8, name: "Queijo", price: 25, stock: 45, category: "Laticínios" },
-  { id: 9, name: "Pão", price: 6, stock: 75, category: "Padaria" },
-  { id: 10, name: "Bolo", price: 20, stock: 30, category: "Padaria" },
-  { id: 11, name: "Carne", price: 35, stock: 25, category: "Carnes" },
-  { id: 12, name: "Frango", price: 18, stock: 55, category: "Carnes" },
+  { id: 5, name: "Laranja", price: 4, stock: 95, category: "Frutas" },
+  { id: 6, name: "Uva", price: 12, stock: 35, category: "Frutas" },
+  { id: 7, name: "Manga", price: 8, stock: 50, category: "Frutas" },
+  { id: 8, name: "Kiwi", price: 15, stock: 25, category: "Frutas" },
+  
+  // Grãos
+  { id: 9, name: "Arroz Branco", price: 15, stock: 200, category: "Grãos" },
+  { id: 10, name: "Feijão Preto", price: 12, stock: 150, category: "Grãos" },
+  { id: 11, name: "Lentilha", price: 18, stock: 80, category: "Grãos" },
+  { id: 12, name: "Grão de Bico", price: 20, stock: 65, category: "Grãos" },
+  { id: 13, name: "Quinoa", price: 35, stock: 40, category: "Grãos" },
+  
+  // Laticínios
+  { id: 14, name: "Leite Integral", price: 8, stock: 90, category: "Laticínios" },
+  { id: 15, name: "Queijo Mussarela", price: 25, stock: 45, category: "Laticínios" },
+  { id: 16, name: "Iogurte Natural", price: 12, stock: 70, category: "Laticínios" },
+  { id: 17, name: "Manteiga", price: 16, stock: 55, category: "Laticínios" },
+  { id: 18, name: "Cream Cheese", price: 22, stock: 30, category: "Laticínios" },
+  
+  // Padaria
+  { id: 19, name: "Pão Francês", price: 6, stock: 75, category: "Padaria" },
+  { id: 20, name: "Bolo de Chocolate", price: 20, stock: 30, category: "Padaria" },
+  { id: 21, name: "Croissant", price: 8, stock: 25, category: "Padaria" },
+  { id: 22, name: "Biscoito Integral", price: 14, stock: 40, category: "Padaria" },
+  { id: 23, name: "Torrada", price: 10, stock: 35, category: "Padaria" },
+  
+  // Carnes
+  { id: 24, name: "Carne Bovina", price: 35, stock: 25, category: "Carnes" },
+  { id: 25, name: "Frango", price: 18, stock: 55, category: "Carnes" },
+  { id: 26, name: "Peixe Salmão", price: 45, stock: 20, category: "Carnes" },
+  { id: 27, name: "Carne Suína", price: 28, stock: 30, category: "Carnes" },
+  { id: 28, name: "Linguiça", price: 22, stock: 40, category: "Carnes" },
+  
+  // Bebidas
+  { id: 29, name: "Água Mineral", price: 3, stock: 200, category: "Bebidas" },
+  { id: 30, name: "Suco de Laranja", price: 9, stock: 60, category: "Bebidas" },
+  { id: 31, name: "Refrigerante Cola", price: 7, stock: 85, category: "Bebidas" },
+  { id: 32, name: "Chá Verde", price: 12, stock: 45, category: "Bebidas" },
+  { id: 33, name: "Café Torrado", price: 25, stock: 35, category: "Bebidas" },
 ]
 
 //--------------------------------------------------------------
@@ -99,20 +131,17 @@ export default function TableWithPagination() {
   })
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Tabela com Paginação</h2>
-      
-      {/* Input de busca */}
+    <div>
       <input
         type="text"
-        placeholder="Buscar produto..."
+        placeholder="🔍 Buscar produto..."
         value={globalFilter ?? ""}
         onChange={e => setGlobalFilter(e.target.value)}
-        style={{ marginBottom: 15, padding: 8, width: "300px" }}
+        className="search-input"
+        style={{ marginBottom: "1rem" }}
       />
 
-      {/* Tabela */}
-      <table border={1} cellPadding={10} style={{ width: "100%", borderCollapse: "collapse" }}>
+      <table className="modern-table">
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
@@ -120,10 +149,8 @@ export default function TableWithPagination() {
                 <th
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
-                  style={{ cursor: "pointer", backgroundColor: "#f5f5f5" }}
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
-                  {/* Indicadores de sorting */}
                   {{
                     asc: " 🔼",
                     desc: " 🔽",
@@ -133,7 +160,6 @@ export default function TableWithPagination() {
             </tr>
           ))}
         </thead>
-
         <tbody>
           {table.getRowModel().rows.map(row => (
             <tr key={row.id}>
@@ -147,54 +173,54 @@ export default function TableWithPagination() {
         </tbody>
       </table>
 
-      {/* Controles de Paginação */}
-      <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 10 }}>
+      <div className="pagination-controls">
         <button
+          className="btn btn-secondary"
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
-          {"<<"}
+          ⏮️
         </button>
         <button
+          className="btn btn-secondary"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          {"<"}
+          ⬅️
         </button>
         <button
+          className="btn btn-secondary"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          {">"}
+          ➡️
         </button>
         <button
+          className="btn btn-secondary"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
-          {">>"}
+          ⏭️
         </button>
 
-        <span style={{ marginLeft: 20 }}>
-          Página{" "}
-          <strong>
-            {table.getState().pagination.pageIndex + 1} de {table.getPageCount()}
-          </strong>
+        <span className="pagination-info">
+          Página <strong>{table.getState().pagination.pageIndex + 1}</strong> de <strong>{table.getPageCount()}</strong>
         </span>
 
         <select
+          className="page-size-selector"
           value={table.getState().pagination.pageSize}
           onChange={e => table.setPageSize(Number(e.target.value))}
-          style={{ marginLeft: 20, padding: 5 }}
         >
           {[5, 10, 20].map(pageSize => (
             <option key={pageSize} value={pageSize}>
-              Mostrar {pageSize}
+              {pageSize} por página
             </option>
           ))}
         </select>
 
-        <span style={{ marginLeft: 20 }}>
-          Total: {table.getFilteredRowModel().rows.length} produtos
+        <span className="pagination-info">
+          Total: <strong>{table.getFilteredRowModel().rows.length}</strong> produtos
         </span>
       </div>
     </div>

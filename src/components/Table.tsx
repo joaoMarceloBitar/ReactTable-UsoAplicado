@@ -1,13 +1,7 @@
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table"
-// useReactTable()      -    cria a instância da tabela, incluindo modelos de linha, cabeçalhos, visibilidade de colunas, meta, etc.
-// getCoreRowModel()    -    gera as linhas básicas
-// flexRender()         -    renderiza qualquer tipo de conteúdo
-
 import type { ColumnDef } from "@tanstack/react-table"
-// tipo de dado da coluna
-//-----------------------------------------------------
+import "./styles.css"
 
-//definindo tipo User
 type User = {
   id: number
   name: string
@@ -15,15 +9,16 @@ type User = {
   email: string
 }
 
-// definindo os dados passados para a table
-
 const data: User[] = [
-  { id: 1, name: "João", age: 22, email: "joao@email.com" },
-  { id: 2, name: "Maria", age: 19, email: "maria@email.com" },
-  { id: 3, name: "Pedro", age: 30, email: "pedro@email.com" },
+  { id: 1, name: "João Silva", age: 22, email: "joao.silva@email.com" },
+  { id: 2, name: "Maria Santos", age: 19, email: "maria.santos@email.com" },
+  { id: 3, name: "Pedro Costa", age: 30, email: "pedro.costa@email.com" },
+  { id: 4, name: "Ana Oliveira", age: 25, email: "ana.oliveira@email.com" },
+  { id: 5, name: "Carlos Ferreira", age: 28, email: "carlos.ferreira@email.com" },
+  { id: 6, name: "Beatriz Lima", age: 24, email: "beatriz.lima@email.com" },
+  { id: 7, name: "Rafael Souza", age: 32, email: "rafael.souza@email.com" },
+  { id: 8, name: "Juliana Rocha", age: 27, email: "juliana.rocha@email.com" },
 ]
-
-// definindo as colunas da table
 
 const columns: ColumnDef<User>[] = [
   {
@@ -44,25 +39,15 @@ const columns: ColumnDef<User>[] = [
   },
 ]
 
-// -- os campos do tipo User devem ser relativos a um accessorkey respectivo
-
 export default function Table() {
-
-// table recebe o retorno do hook useReactTable que recebe data e columns
-// -- data: array de objetos, no caso dados do tipo user
-// -- columns definem como acessar os dados pelo acessorKey
-
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    //getCoreRowModel é obrigatório, se não a tabela não renderiza nada.
   })
 
   return (
-           //grossura borda     //tamanho tabela
-    <table border={5}           cellPadding={13}>
-        {/* header da tabela*/}
+    <table className="modern-table">
       <thead>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
@@ -74,8 +59,6 @@ export default function Table() {
           </tr>
         ))}
       </thead>
-
-        {/* corpo da tabela*/}
       <tbody>
         {table.getRowModel().rows.map(row => (
           <tr key={row.id}>

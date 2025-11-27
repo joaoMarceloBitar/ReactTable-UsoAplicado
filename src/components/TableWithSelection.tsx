@@ -4,12 +4,9 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table"
-
 import type { ColumnDef, RowSelectionState } from "@tanstack/react-table"
+import "./styles.css"
 
-//--------------------------------------------------------------
-// 1. Tipo dos dados
-//--------------------------------------------------------------
 type Employee = {
   id: number
   name: string
@@ -17,27 +14,31 @@ type Employee = {
   salary: number
   department: string
 }
-
-//--------------------------------------------------------------
-// 2. Dados de funcionários
-//--------------------------------------------------------------
 const employees: Employee[] = [
-  { id: 1, name: "Ana Silva", position: "Desenvolvedora", salary: 8000, department: "TI" },
-  { id: 2, name: "Carlos Santos", position: "Designer", salary: 6500, department: "Marketing" },
-  { id: 3, name: "Beatriz Costa", position: "Gerente", salary: 12000, department: "Vendas" },
-  { id: 4, name: "Diego Oliveira", position: "Analista", salary: 5500, department: "RH" },
-  { id: 5, name: "Elena Ferreira", position: "Coordenadora", salary: 9500, department: "TI" },
+  { id: 1, name: "Ana Silva", position: "Desenvolvedora Senior", salary: 8000, department: "TI" },
+  { id: 2, name: "Carlos Santos", position: "Designer UX/UI", salary: 6500, department: "Marketing" },
+  { id: 3, name: "Beatriz Costa", position: "Gerente de Vendas", salary: 12000, department: "Vendas" },
+  { id: 4, name: "Diego Oliveira", position: "Analista de RH", salary: 5500, department: "RH" },
+  { id: 5, name: "Elena Ferreira", position: "Coordenadora de TI", salary: 9500, department: "TI" },
+  { id: 6, name: "Fernando Lima", position: "Desenvolvedor Junior", salary: 4500, department: "TI" },
+  { id: 7, name: "Gabriela Rocha", position: "Analista de Marketing", salary: 5800, department: "Marketing" },
+  { id: 8, name: "Hugo Mendes", position: "Vendedor", salary: 4200, department: "Vendas" },
+  { id: 9, name: "Isabela Torres", position: "Gerente de RH", salary: 11000, department: "RH" },
+  { id: 10, name: "João Pereira", position: "Arquiteto de Software", salary: 15000, department: "TI" },
+  { id: 11, name: "Larissa Alves", position: "Social Media", salary: 4800, department: "Marketing" },
+  { id: 12, name: "Marcos Barbosa", position: "Supervisor de Vendas", salary: 7500, department: "Vendas" },
+  { id: 13, name: "Natália Cardoso", position: "Recrutadora", salary: 5200, department: "RH" },
+  { id: 14, name: "Otávio Gomes", position: "DevOps Engineer", salary: 10500, department: "TI" },
+  { id: 15, name: "Patrícia Dias", position: "Gerente de Marketing", salary: 13500, department: "Marketing" },
 ]
 
-//--------------------------------------------------------------
-// 3. Definição das colunas com checkbox de seleção
-//--------------------------------------------------------------
 const columns: ColumnDef<Employee>[] = [
   {
     id: "select",
     header: ({ table }) => (
       <input
         type="checkbox"
+        className="custom-checkbox"
         checked={table.getIsAllRowsSelected()}
         onChange={table.getToggleAllRowsSelectedHandler()}
       />
@@ -45,6 +46,7 @@ const columns: ColumnDef<Employee>[] = [
     cell: ({ row }) => (
       <input
         type="checkbox"
+        className="custom-checkbox"
         checked={row.getIsSelected()}
         onChange={row.getToggleSelectedHandler()}
       />
@@ -73,11 +75,7 @@ const columns: ColumnDef<Employee>[] = [
   },
 ]
 
-//--------------------------------------------------------------
-// 4. Componente com seleção de linhas
-//--------------------------------------------------------------
 export default function TableWithSelection() {
-  // estado para controlar quais linhas estão selecionadas
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const table = useReactTable({
@@ -88,72 +86,62 @@ export default function TableWithSelection() {
     },
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
-    enableRowSelection: true,  // habilita seleção de linhas
+    enableRowSelection: true,
   })
 
-  // função para obter funcionários selecionados
   const getSelectedEmployees = () => {
     return table.getSelectedRowModel().rows.map(row => row.original)
   }
 
-  // função para calcular salário total dos selecionados
   const getTotalSalary = () => {
     return getSelectedEmployees().reduce((total, emp) => total + emp.salary, 0)
   }
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Tabela com Seleção de Linhas</h2>
-      
-      {/* Informações sobre seleção */}
-      <div style={{ marginBottom: 15, padding: 10, backgroundColor: "#f0f0f0", borderRadius: 5 }}>
-        <p><strong>Selecionados:</strong> {table.getSelectedRowModel().rows.length} funcionários</p>
-        {table.getSelectedRowModel().rows.length > 0 && (
+    <div>
+      {table.getSelectedRowModel().rows.length > 0 && (
+        <div className="selection-info">
+          <h3>📊 Resumo da Seleção</h3>
+          <p><strong>Selecionados:</strong> {table.getSelectedRowModel().rows.length} funcionários</p>
           <p><strong>Salário Total:</strong> R$ {getTotalSalary().toLocaleString()}</p>
-        )}
-      </div>
+        </div>
+      )}
 
-      {/* Botões de ação */}
-      <div style={{ marginBottom: 15 }}>
+      <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
         <button
+          className="btn btn-secondary"
           onClick={() => setRowSelection({})}
-          style={{ marginRight: 10, padding: "5px 10px" }}
         >
-          Limpar Seleção
+          🗑️ Limpar Seleção
         </button>
         <button
+          className="btn btn-primary"
           onClick={() => {
             const selected = getSelectedEmployees()
             alert(`Funcionários selecionados:\n${selected.map(emp => emp.name).join('\n')}`)
           }}
           disabled={table.getSelectedRowModel().rows.length === 0}
-          style={{ padding: "5px 10px" }}
         >
-          Mostrar Selecionados
+          📄 Mostrar Selecionados
         </button>
       </div>
-
-      {/* Tabela */}
-      <table border={1} cellPadding={10} style={{ width: "100%", borderCollapse: "collapse" }}>
+      <table className="modern-table">
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id} style={{ backgroundColor: "#f5f5f5" }}>
+                <th key={header.id}>
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
-
         <tbody>
           {table.getRowModel().rows.map(row => (
             <tr 
               key={row.id}
-              style={{ 
-                backgroundColor: row.getIsSelected() ? "#e3f2fd" : "white" 
-              }}
+              className={row.getIsSelected() ? "selected-row" : ""}
             >
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
@@ -165,14 +153,13 @@ export default function TableWithSelection() {
         </tbody>
       </table>
 
-      {/* Lista dos selecionados */}
       {table.getSelectedRowModel().rows.length > 0 && (
-        <div style={{ marginTop: 20, padding: 15, border: "1px solid #ddd", borderRadius: 5 }}>
-          <h3>Funcionários Selecionados:</h3>
+        <div className="selected-list">
+          <h3>👥 Funcionários Selecionados</h3>
           <ul>
             {getSelectedEmployees().map(emp => (
               <li key={emp.id}>
-                {emp.name} - {emp.position} - R$ {emp.salary.toLocaleString()}
+                <strong>{emp.name}</strong> - {emp.position} - R$ {emp.salary.toLocaleString()}
               </li>
             ))}
           </ul>
