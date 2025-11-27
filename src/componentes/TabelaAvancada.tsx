@@ -196,36 +196,32 @@ const colunas: ColumnDef<Venda>[] = [
 ]
 
 export default function TabelaAvancada() {
-  // Estados para todas as funcionalidades da tabela
-  const [ordenacao, definirOrdenacao] = useState<SortingState>([]) // Ordenação
-  const [filtrosColunas, definirFiltrosColunas] = useState<ColumnFiltersState>([]) // Filtros por coluna
-  const [filtroGlobal, definirFiltroGlobal] = useState("") // Busca geral
+  const [ordenacao, definirOrdenacao] = useState<SortingState>([])
+  const [filtrosColunas, definirFiltrosColunas] = useState<ColumnFiltersState>([])
+  const [filtroGlobal, definirFiltroGlobal] = useState("")
   const [paginacao, definirPaginacao] = useState({
-    pageIndex: 0, // Página atual (começa em 0)
-    pageSize: 8, // Itens por página
+    pageIndex: 0,
+    pageSize: 8,
   })
 
-  // Configuração completa da tabela com todas as funcionalidades
   const tabela = useReactTable({
     data: dadosVendas,
     columns: colunas,
     state: {
-      sorting: ordenacao, // Estado da ordenação
-      columnFilters: filtrosColunas, // Estado dos filtros por coluna
-      globalFilter: filtroGlobal, // Estado da busca global
-      pagination: paginacao, // Estado da paginação
+      sorting: ordenacao,
+      columnFilters: filtrosColunas,
+      globalFilter: filtroGlobal,
+      pagination: paginacao,
     },
-    // Funções chamadas quando os estados mudam
     onSortingChange: definirOrdenacao,
     onColumnFiltersChange: definirFiltrosColunas,
     onGlobalFilterChange: definirFiltroGlobal,
     onPaginationChange: definirPaginacao,
-    // Modelos que habilitam as funcionalidades
-    getCoreRowModel: getCoreRowModel(), // Modelo básico
-    getFilteredRowModel: getFilteredRowModel(), // Habilita filtros
-    getSortedRowModel: getSortedRowModel(), // Habilita ordenação
-    getPaginationRowModel: getPaginationRowModel(), // Habilita paginação
-    globalFilterFn: "includesString", // Tipo de busca global
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    globalFilterFn: "includesString",
   })
 
   const dadosFiltrados = tabela.getFilteredRowModel().rows.map(linha => linha.original)

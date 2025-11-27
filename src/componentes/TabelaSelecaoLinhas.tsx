@@ -77,26 +77,23 @@ const colunas: ColumnDef<Funcionario>[] = [
 ]
 
 export default function TabelaSelecaoLinhas() {
-  // Estado para controlar quais linhas estão selecionadas
   const [selecaoLinhas, definirSelecaoLinhas] = useState<RowSelectionState>({})
 
   const tabela = useReactTable({
     data: funcionarios,
     columns: colunas,
     state: {
-      rowSelection: selecaoLinhas, // Passa seleção para a tabela
+      rowSelection: selecaoLinhas,
     },
-    onRowSelectionChange: definirSelecaoLinhas, // Função chamada quando seleção muda
+    onRowSelectionChange: definirSelecaoLinhas,
     getCoreRowModel: getCoreRowModel(),
-    enableRowSelection: true, // Habilita seleção de linhas
+    enableRowSelection: true,
   })
 
-  // Função para obter os dados dos funcionários selecionados
   const obterFuncionariosSelecionados = () => {
     return tabela.getSelectedRowModel().rows.map(linha => linha.original)
   }
 
-  // Função para calcular salário total dos selecionados
   const obterSalarioTotal = () => {
     return obterFuncionariosSelecionados().reduce((total, func) => total + func.salario, 0)
   }

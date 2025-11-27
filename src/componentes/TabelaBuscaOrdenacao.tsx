@@ -51,40 +51,37 @@ const colunas: ColumnDef<Produto>[] = [
 ]
 
 export default function TabelaBuscaOrdenacao() {
-  const [filtroGlobal, definirFiltroGlobal] = useState("") // Texto da busca
-  const [ordenacao, definirOrdenacao] = useState<SortingState>([]) // Estado da ordenação
+  const [filtroGlobal, definirFiltroGlobal] = useState("")
+  const [ordenacao, definirOrdenacao] = useState<SortingState>([])
 
   const tabela = useReactTable({
     data: produtos,
     columns: colunas,
     state: {
-      globalFilter: filtroGlobal, // Passa o filtro para a tabela
-      sorting: ordenacao, // Passa a ordenação para a tabela
+      globalFilter: filtroGlobal,
+      sorting: ordenacao,
     },
-    onGlobalFilterChange: definirFiltroGlobal, // Função chamada quando filtro muda
-    onSortingChange: definirOrdenacao, // Função chamada quando ordenação muda
-    getCoreRowModel: getCoreRowModel(), // Modelo básico
-    getFilteredRowModel: getFilteredRowModel(), // Habilita filtros
-    getSortedRowModel: getSortedRowModel(), // Habilita ordenação
-    globalFilterFn: "includesString", // Tipo de filtro (busca por texto)
+    onGlobalFilterChange: definirFiltroGlobal,
+    onSortingChange: definirOrdenacao,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    globalFilterFn: "includesString",
   })
 
-  // Obtém as linhas já filtradas para exibição
   const linhasFiltradas = tabela.getFilteredRowModel().rows
   
   return (
     <div>
-      {/* Campo de busca que filtra em tempo real */}
       <input
         type="text"
         placeholder="🔍 Buscar produto..."
-        value={filtroGlobal ?? ""} // Valor controlado pelo estado
-        onChange={e => definirFiltroGlobal(e.target.value)} // Atualiza filtro
+        value={filtroGlobal ?? ""}
+        onChange={e => definirFiltroGlobal(e.target.value)}
         className="input-busca"
         style={{ marginBottom: "1rem" }}
       />
       
-      {/* Contador de resultados */}
       <p style={{ marginBottom: "1rem", color: "#666" }}>
         Mostrando {linhasFiltradas.length} de {produtos.length} produtos
       </p>
