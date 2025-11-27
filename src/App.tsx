@@ -1,6 +1,8 @@
 import Table from "./components/Table"
 import './App.css'
 import TableSortSearch from "./components/TableSortSearch"
+import TableWithPagination from "./components/TableWithPagination"
+import TableWithSelection from "./components/TableWithSelection"
 
 function App() {
 
@@ -11,6 +13,12 @@ function App() {
       </header>
       <header>  
         <TableSortSearch />
+      </header>
+      <header>
+        <TableWithPagination />
+      </header>
+      <header>
+        <TableWithSelection />
       </header>
     </>
   )
